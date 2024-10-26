@@ -5,11 +5,8 @@ using Utilla;
 
 namespace lavaupdate
 {
-	/// <summary>
-	/// This is your mod's main class.
-	/// </summary>
 
-	/* This attribute tells Utilla to look for [ModdedGameJoin] and [ModdedGameLeave] */
+	
 	[ModdedGamemode]
 	[BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
 	[BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
@@ -19,9 +16,7 @@ namespace lavaupdate
 
 		void Start()
 		{
-			/* A lot of Gorilla Tag systems will not be set up when start is called /*
-			/* Put code in OnGameInitialized to avoid null references */
-
+			
 			Utilla.Events.GameInitialized += OnGameInitialized;
 		}
 
@@ -49,8 +44,17 @@ namespace lavaupdate
 
 		void Update()
 		{
-			/* Code here runs every frame when the mod is enabled */
-		}
+			if (inRoom)
+			{
+				GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+				lava.SetActive(true);
+			}
+			else
+			{
+                GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+                lava.SetActive(false);
+            }
+        }
 
 		/* This attribute tells Utilla to call this method when a modded room is joined */
 		[ModdedGamemodeJoin]
@@ -59,28 +63,7 @@ namespace lavaupdate
 
 			inRoom = true;
 		}
-        public void lava()
-        {
-            if (inRoom)
-            {
-                GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
-                //if (lava != null)
-                //{
-                    lava.SetActive(true);
-                //}
-            }
-            /*else
-            {
-                GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
-               if (lava != null)
-               {
-                    lava.SetActive(false); 
-               }
-            }*/
-        }
-
-
-
+       
         /* This attribute tells Utilla to call this method when a modded room is left */
         [ModdedGamemodeLeave]
 		public void OnLeave(string gamemode)
