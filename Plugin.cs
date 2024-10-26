@@ -3,7 +3,7 @@ using BepInEx;
 using UnityEngine;
 using Utilla;
 
-namespace lavaupdate
+namespace bringbacklavaupdate
 {
 
 	

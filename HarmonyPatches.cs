@@ -2,7 +2,7 @@
 using System.Reflection;
 using HarmonyLib;
 
-namespace lavaupdate
+namespace bringbacklavaupdate
 {
 	/// <summary>
 	/// This class handles applying harmony patches to the game.
