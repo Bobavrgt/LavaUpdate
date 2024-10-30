@@ -7,6 +7,6 @@
 	{
 		public const string GUID = "com.boba.gorillatag.bringbacklavaupdate";
 		public const string Name = "bringbacklavaupdate";
-		public const string Version = "1.0.0";
+		public const string Version = "1.0.1";
 	}
 }
