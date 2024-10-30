@@ -39,12 +39,13 @@ namespace bringbacklavaupdate
 
 		void OnGameInitialized(object sender, EventArgs e)
 		{
-			/* Code here runs after the game initializes (i.e. GorillaLocomotion.Player.Instance != null) */
-		}
+            GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+            /* Code here runs after the game initializes (i.e. GorillaLocomotion.Player.Instance != null) */
+        }
 
 		void Update()
 		{
-			if (inRoom)
+			/*if (inRoom)
 			{
 				GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
 				lava.SetActive(true);
@@ -53,22 +54,25 @@ namespace bringbacklavaupdate
 			{
                 GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
                 lava.SetActive(false);
-            }
+            }*/
         }
 
 		/* This attribute tells Utilla to call this method when a modded room is joined */
 		[ModdedGamemodeJoin]
 		public void OnJoin(string gamemode)
 		{
+            GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+            lava.SetActive(true);
 
-			inRoom = true;
+            inRoom = true;
 		}
        
         /* This attribute tells Utilla to call this method when a modded room is left */
         [ModdedGamemodeLeave]
 		public void OnLeave(string gamemode)
 		{
-            
+            GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+            lava.SetActive(false);
 
             inRoom = false;
 		}
