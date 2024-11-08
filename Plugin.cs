@@ -1,14 +1,18 @@
 ﻿using System;
 using BepInEx;
 using UnityEngine;
-using Utilla;
+using Newtilla;
+
 
 namespace bringbacklavaupdate
 {
 
-	
-	[ModdedGamemode]
-	[BepInDependency("org.legoandmars.gorillatag.utilla", "1.5.0")]
+
+
+    [BepInDependency("Lofiat.Newtilla", "1.1.0")]
+    [BepInIncompatibility("org.iidk.gorillatag.iimenu")]
+	[BepInIncompatibility("com.goldentrophy.gorillatag.nametags")]
+	[BepInIncompatibility("com.dedouwe26.gorillatag.cosmetx")]
 	[BepInPlugin(PluginInfo.GUID, PluginInfo.Name, PluginInfo.Version)]
 	public class Plugin : BaseUnityPlugin
 	{
@@ -16,9 +20,10 @@ namespace bringbacklavaupdate
 
 		void Start()
 		{
-			
-			Utilla.Events.GameInitialized += OnGameInitialized;
-		}
+
+            Newtilla.Newtilla.OnJoinModded += OnModdedJoined;
+            Newtilla.Newtilla.OnLeaveModded += OnModdedLeft;
+        }
 
 		void OnEnable()
 		{
@@ -57,20 +62,24 @@ namespace bringbacklavaupdate
             }*/
         }
 
-		/* This attribute tells Utilla to call this method when a modded room is joined */
-		[ModdedGamemodeJoin]
-		public void OnJoin(string gamemode)
-		{
+        /* This attribute tells Utilla to call this method when a modded room is joined */
+
+        void OnModdedJoined(string modeName)
+        {
             GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
+            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV/").transform.GetChild(0).gameObject.SetActive(false);//the lava
+            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV/").transform.GetChild(2).gameObject.SetActive(false);//the buckets
+            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV/").transform.GetChild(4).gameObject.SetActive(false);//
+            GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV/").transform.GetChild(8).gameObject.SetActive(false);//
             lava.SetActive(true);
 
             inRoom = true;
 		}
-       
+
         /* This attribute tells Utilla to call this method when a modded room is left */
-        [ModdedGamemodeLeave]
-		public void OnLeave(string gamemode)
-		{
+
+        void OnModdedLeft(string modeName)
+        {
             GameObject lava = GameObject.Find("Environment Objects/LocalObjects_Prefab/Forest/ILavaYou_PrefabV");
             lava.SetActive(false);
 
